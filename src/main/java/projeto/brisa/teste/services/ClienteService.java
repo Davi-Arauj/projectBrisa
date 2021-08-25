@@ -2,7 +2,6 @@ package projeto.brisa.teste.services;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ public class ClienteService {
 	
 	private ClienteRepository clienteRepository;
 	
-	private ClienteMapper clienteMapper = ClienteMapper.INSTANCE;
+	private final ClienteMapper clienteMapper = ClienteMapper.INSTANCE;
 	
 	public ClienteDTO create(ClienteDTO clienteDto) {
 		verifyIfExists(clienteDto.getId());
