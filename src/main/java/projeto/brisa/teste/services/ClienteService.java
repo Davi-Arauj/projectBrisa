@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import lombok.AllArgsConstructor;
 import projeto.brisa.teste.dto.ClienteDTO;
 import projeto.brisa.teste.entity.Cliente;
+import projeto.brisa.teste.exception.DataIntegrityException;
 import projeto.brisa.teste.mapper.ClienteMapper;
 import projeto.brisa.teste.repositories.ClienteRepository;
 
@@ -22,20 +23,36 @@ public class ClienteService {
 	private final ClienteMapper clienteMapper = ClienteMapper.INSTANCE;
 	
 	public ClienteDTO create(ClienteDTO clienteDto) {
-		verifyIfExists(clienteDto.getId());
 		Cliente cliente = clienteMapper.toModel(clienteDto);
-		Cliente clienteSaved  = clienteRepository.save(cliente);
+		Cliente clienteSaved = null;
+		try {		
+			 clienteSaved  = clienteRepository.save(cliente);
+		} catch (DataIntegrityException e) {
+			e.getMessage();																																																																																																																																																																																																																																																																																																									
+		}
 		return clienteMapper.toDTO(clienteSaved);
 	}
 
-	public Optional<Cliente> verifyIfExists(Integer id) {
-		return clienteRepository.findById(id);
-	}
+	
 
 	public List<ClienteDTO> findAll() {
 		return clienteRepository.findAll()
 				.stream()
 				.map(clienteMapper :: toDTO)
 				.collect(Collectors.toList());
+	}
+	
+	
+	public void del(ClienteDTO clienteDto) {
+		Cliente cliente = clienteMapper.toModel(clienteDto);
+		clienteRepository.deleteById(cliente.getId());
+	}
+	public void verifyIfExists(Cliente clienteTeste) {
+		 Cliente clienteReturn =  clienteRepository.findByName(clienteTeste);
+		 	if(clienteReturn.equals(null)){
+		 		//não faço nada
+		 	}else {
+		 		new DataIntegrityException("O cliente já existe!");
+		 	}
 	}
 }

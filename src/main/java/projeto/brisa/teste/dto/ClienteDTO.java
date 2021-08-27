@@ -2,8 +2,13 @@ package projeto.brisa.teste.dto;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.UniqueElements;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
