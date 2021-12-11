@@ -6,7 +6,7 @@ import projeto.brisa.teste.entity.Cliente;
 
 public interface ClienteRepository extends JpaRepository<Cliente,Integer>{
 
-	public Cliente findByName(Cliente name);
+	public Cliente findByName(String name);
 
 	
 }

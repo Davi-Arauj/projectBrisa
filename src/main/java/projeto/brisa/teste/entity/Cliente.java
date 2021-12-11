@@ -1,37 +1,42 @@
 package projeto.brisa.teste.entity;
 
-import javax.persistence.Column;
+import java.io.Serializable;
+
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
 
-import org.hibernate.validator.constraints.UniqueElements;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import projeto.brisa.teste.enums.ClienteType;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
-@Builder
-public class Cliente {
+public class Cliente implements Serializable{
 
+
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	
-	@Column(nullable = false, unique = true)
+	@NotEmpty(message = "Preenchimento obrigatório")
 	private String name;
 	
-	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
-	private ClienteType type;
+	private ClienteType typeClient;
+	
+	
+	public Cliente(Integer id, String name, ClienteType typeClient) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.typeClient = (typeClient==null) ? null : typeClient;
+		
+	}
+	public Cliente() {
+		
+	}
+	
+	
 }
