@@ -6,7 +6,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,44 +17,44 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
-import projeto.brisa.teste.dto.ClienteDTO;
-import projeto.brisa.teste.dto.response.ClienteResponseDTO;
+import projeto.brisa.teste.dto.EnderecoDTO;
+import projeto.brisa.teste.dto.response.EnderecoResponseDTO;
 import projeto.brisa.teste.exception.ObjectNotFoundException;
-import projeto.brisa.teste.services.ClienteService;
+import projeto.brisa.teste.services.EnderecoService;
 
 @RestController
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-@RequestMapping("/api/v1/clientes")
-public class ClienteController {
+@RequestMapping("/api/v1/enderecos")
+public class EnderecoController {
 
-	private ClienteService clienteService;
+	private EnderecoService enderecoService;
 
 	@GetMapping("/{id}")
-	public ClienteDTO find(@PathVariable Integer id) {
-		return clienteService.findById(id);
+	public EnderecoDTO find(@PathVariable Integer id) {
+		return enderecoService.findById(id);
 	}
 
 	@GetMapping
-	public List<ClienteDTO> findAll() {
-		return clienteService.findAll();
+	public List<EnderecoDTO> findAll() {
+		return enderecoService.findAll();
 
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<ClienteDTO> createdCliente(@RequestBody @Valid ClienteDTO clienteDto) {
-		return ResponseEntity.ok().body(clienteService.create(clienteDto));
+	public EnderecoDTO createdEndereco(@RequestBody @Valid EnderecoDTO enderecoDto) {
+		return enderecoService.create(enderecoDto);
 	}
 
 	@PutMapping("/{id}")
-	public ClienteResponseDTO updateCliente(@PathVariable Integer id, @RequestBody ClienteDTO clienteDto)
+	public EnderecoResponseDTO updateEndereco(@PathVariable Integer id, @RequestBody EnderecoDTO enderecoDto)
 			throws ObjectNotFoundException {
-		return clienteService.update(id, clienteDto);
+		return enderecoService.update(id, enderecoDto);
 	}
 
 	@DeleteMapping("/{id}")
-	public ClienteResponseDTO deleteCliente(@PathVariable Integer id) {
-		return clienteService.del(id);
+	public EnderecoResponseDTO deleteEndereco(@PathVariable Integer id) {
+		return enderecoService.del(id);
 	}
 
 }

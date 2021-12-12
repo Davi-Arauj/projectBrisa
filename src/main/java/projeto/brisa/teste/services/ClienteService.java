@@ -24,10 +24,12 @@ public class ClienteService {
 	private ModelMapper clienteMapper;
 
 	// Criar um Cliente
-	public ClienteDTO create(ClienteDTO clienteDto) {
+	public ClienteDTO create(ClienteDTO clienteDto)  {
 		verifyIfExists(toCliente(clienteDto));
 		Cliente clienteSaved = null;
-		clienteSaved = clienteRepository.save(toCliente(clienteDto));
+		Cliente cli = toCliente(clienteDto);
+		clienteSaved = clienteRepository.save(cli);
+		
 		return toClienteModel(clienteSaved);
 	}
 
@@ -38,6 +40,7 @@ public class ClienteService {
 
 	// Atualiza o Cliente
 	public ClienteResponseDTO update(Integer id, ClienteDTO clienteDto) {
+		verifyIfExists(toCliente(clienteDto));
 		ClienteDTO cliUpdate = findById(id);
 
 		updateData(cliUpdate, clienteDto);
@@ -47,7 +50,8 @@ public class ClienteService {
 
 	// Verfica se o Cliente existe por o ID
 	public ClienteDTO findById(Integer id) {
-		Cliente cli = clienteRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Cliente não existe"));
+		Cliente cli = clienteRepository.findById(id)
+				.orElseThrow(() -> new ObjectNotFoundException("Cliente não existe"));
 		return toClienteModel(cli);
 	}
 
@@ -60,9 +64,9 @@ public class ClienteService {
 
 	// Verifica se o Cliente Já existe pelo Nome
 	public void verifyIfExists(Cliente clienteTeste) {
-		Cliente clienteReturn = clienteRepository.findByName(clienteTeste.getName());
+		Cliente clienteReturn = clienteRepository.findByNome(clienteTeste.getNome());
 		if (clienteReturn == null) {
-		} else if (clienteTeste.getName().equalsIgnoreCase(clienteReturn.getName())) {
+		} else if (clienteTeste.getNome().equalsIgnoreCase(clienteReturn.getNome())) {
 			throw new DataDuplicateException("O cliente já existe!");
 		}
 
@@ -80,8 +84,8 @@ public class ClienteService {
 
 	// Metodo para auxiliar na atualização
 	private ClienteDTO updateData(ClienteDTO updatedClient, ClienteDTO clientdto) {
-		updatedClient.setName(clientdto.getName());
-		updatedClient.setTypeClient(clientdto.getTypeClient());
+		updatedClient.setNome(clientdto.getNome());
+		updatedClient.setTipo(clientdto.getTipo());
 		return updatedClient;
 	}
 
