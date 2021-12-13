@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
 import projeto.brisa.teste.dto.PontoDTO;
+import projeto.brisa.teste.dto.response.PontoResponseDTO;
 import projeto.brisa.teste.entity.Ponto;
 import projeto.brisa.teste.services.PontoService;
 
@@ -34,5 +37,13 @@ public class PontoController {
 		return ResponseEntity.ok().body(pontoService.findAll());
 
 	}
+	
+	@DeleteMapping("/{id}")
+	public PontoResponseDTO deleteCliente(@PathVariable Integer id) {
+		return pontoService.del(id);
+	}
+
+	
+	
 
 }
