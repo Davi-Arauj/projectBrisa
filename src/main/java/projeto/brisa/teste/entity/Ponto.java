@@ -10,7 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import lombok.Data;
-import projeto.brisa.teste.dto.ClienteDTO;
 
 @Data
 @Entity

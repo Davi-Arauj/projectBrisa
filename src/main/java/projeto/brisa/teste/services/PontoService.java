@@ -21,6 +21,7 @@ public class PontoService {
 	private PontoRepository pontoRepository;
 	
 	private ClienteService clienteService;
+	
 	private EnderecoService enderecoService;
 
 	private ModelMapper pontoMapper;
@@ -81,6 +82,13 @@ public class PontoService {
 				.orElseThrow(() -> new ObjectNotFoundException("Ponto não existe"));
 		return toPontoModel(pon);
 	}
+	
+	// Verfica se o Ponto existe por o ID
+		public Ponto findId(Integer id) {
+			Ponto pon = pontoRepository.findById(id)
+					.orElseThrow(() -> new ObjectNotFoundException("Ponto não existe"));
+			return (pon);
+		}
 	
 	// Metodo criar menssagem de resposta.
 		private PontoResponseDTO createMessageResponse(Integer id, String message) {
