@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import lombok.Data;
+import projeto.brisa.teste.dto.ClienteDTO;
 
 @Data
 @Entity
@@ -30,8 +31,9 @@ public class Ponto implements Serializable{
 	private Endereco endereco;
 	
 	
-	public Ponto(Cliente cli, Endereco end) {
+	public Ponto(Integer idPonto,Cliente cli, Endereco end) {
 	
+		id = idPonto;
 		cliente = cli;
 		endereco = end;
 		

@@ -7,13 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
-import projeto.brisa.teste.dto.ClienteDTO;
 import projeto.brisa.teste.dto.PontoDTO;
-import projeto.brisa.teste.dto.response.ClienteResponseDTO;
 import projeto.brisa.teste.dto.response.PontoResponseDTO;
-import projeto.brisa.teste.entity.Cliente;
-import projeto.brisa.teste.entity.Endereco;
 import projeto.brisa.teste.entity.Ponto;
+import projeto.brisa.teste.exception.DataDuplicateException;
 import projeto.brisa.teste.exception.ObjectNotFoundException;
 import projeto.brisa.teste.repositories.PontoRepository;
 
@@ -22,19 +19,34 @@ import projeto.brisa.teste.repositories.PontoRepository;
 public class PontoService {
 
 	private PontoRepository pontoRepository;
+	
+	private ClienteService clienteService;
+	private EnderecoService enderecoService;
 
 	private ModelMapper pontoMapper;
 
-	public PontoDTO create(PontoDTO pontoDTO) {
-		Cliente cli = new Cliente();
-		Endereco end = new Endereco();
-		cli.setId(pontoDTO.getCliente_id());
-		end.setId(pontoDTO.getEndereco_id());
-
-		Ponto pontoSaved = new Ponto(cli, end);
-
-		pontoRepository.save(pontoSaved);
-		return toPontoModel(pontoSaved);
+	public PontoDTO create(PontoDTO ponDTO) {
+		
+		Ponto pon = new Ponto();
+				pon.setCliente(clienteService.findId(ponDTO.getCliente_id()));
+				pon.setEndereco( enderecoService.findId(ponDTO.getEndereco_id()));
+				pon.setId(ponDTO.getId());
+		PontoDTO pontoSaved = new PontoDTO(pon);
+	
+		//verificar se o ponto já existe
+		Ponto pontoTeste = pontoRepository.findByClienteByEndereco
+				(pon.getCliente().getNome(), pon.getEndereco().getLogradouro());	
+		
+		if(pontoTeste != null) {
+			
+			System.out.println("Depois da busca no banco "+pontoTeste.getCliente().getNome());
+			System.out.println("Depois da busca no banco "+pontoTeste.getEndereco().getLogradouro());
+			throw new DataDuplicateException("O Ponto já existe!");
+		}
+		
+		pontoRepository.save(toPonto(pontoSaved));
+		return (pontoSaved);
+		
 	}
 
 	public List<Ponto> findAll() {
@@ -46,9 +58,15 @@ public class PontoService {
 		return pontoMapper.map(pon, PontoDTO.class);
 	}
 
-	// Transforma o PontoDTO em Ponto
-	public Ponto toPonto(PontoDTO pon) {
-		return pontoMapper.map(pon, Ponto.class);
+	// Transforma o PontoDTO em Ponto Apenas se existirem CLiente e Endereço
+	public Ponto toPonto(PontoDTO ponDTO) {
+				
+		Ponto pon = new Ponto();
+		pon.setCliente(clienteService.findId(ponDTO.getCliente_id()));
+		pon.setEndereco( enderecoService.findId(ponDTO.getEndereco_id()));
+		pon.setId(ponDTO.getId());
+
+		return pon;
 	}
 
 	public PontoResponseDTO del(Integer id) {

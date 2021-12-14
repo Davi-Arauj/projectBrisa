@@ -52,6 +52,12 @@ public class EnderecoService {
 		Endereco end = enderecoRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Endereco não existe"));
 		return toEnderecoModel(end);
 	}
+	
+	// Verfica se o Endereco existe por o ID
+		public Endereco findId(Integer id) {
+			Endereco end = enderecoRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Endereco não existe"));
+			return (end);
+		}
 
 	// Apagar um Endereco por o ID
 	public EnderecoResponseDTO del(Integer id) {

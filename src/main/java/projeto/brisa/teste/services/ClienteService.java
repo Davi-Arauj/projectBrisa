@@ -54,6 +54,12 @@ public class ClienteService {
 				.orElseThrow(() -> new ObjectNotFoundException("Cliente não existe"));
 		return toClienteModel(cli);
 	}
+	// Verfica se o Cliente existe por o ID
+		public Cliente findId(Integer id) {
+			Cliente cli = clienteRepository.findById(id)
+					.orElseThrow(() -> new ObjectNotFoundException("Cliente não existe"));
+			return (cli);
+		}
 
 	// Apagar um Cliente por o ID
 	public ClienteResponseDTO del(Integer id) {
