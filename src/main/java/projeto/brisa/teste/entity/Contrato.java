@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 import lombok.Data;
+import projeto.brisa.teste.enums.ContratoType;
 
 @Data
 @Entity
@@ -22,17 +23,31 @@ public class Contrato implements Serializable {
 	@OneToOne
 	private Ponto ponto;
 	
-	private String estadoAtual;
+	private ContratoType estadoAtual;
 
 	public Contrato(Integer id, Ponto ponto) {
 		super();
 		this.id = id;
 		this.ponto = ponto;
-		this.estadoAtual = "Em Vigor";
+		this.estadoAtual = ContratoType.EM_VIGOR;
 	}
 
 	public Contrato() {
-		this.estadoAtual = "Em Vigor";
+		this.estadoAtual = ContratoType.EM_VIGOR;
 	}
+	
+	public ContratoType VigorDesativado() {
+		return this.estadoAtual = ContratoType.DESATIVADO_TEMPORARIO;
+	}
+	
+	public ContratoType DesativadoAtivo() {
+		return this.estadoAtual = ContratoType.EM_VIGOR;
 
+	}
+	
+	public ContratoType DesativadoCancelado() {
+		return this.estadoAtual = ContratoType.CANCELADO;
+
+	}
+	
 }

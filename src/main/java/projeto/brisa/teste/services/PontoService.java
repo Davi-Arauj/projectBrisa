@@ -19,35 +19,33 @@ import projeto.brisa.teste.repositories.PontoRepository;
 public class PontoService {
 
 	private PontoRepository pontoRepository;
-	
+
 	private ClienteService clienteService;
-	
+
 	private EnderecoService enderecoService;
 
 	private ModelMapper pontoMapper;
 
 	public PontoDTO create(PontoDTO ponDTO) {
-		
+
 		Ponto pon = new Ponto();
-				pon.setCliente(clienteService.findId(ponDTO.getCliente_id()));
-				pon.setEndereco( enderecoService.findId(ponDTO.getEndereco_id()));
-				pon.setId(ponDTO.getId());
+		pon.setCliente(clienteService.findId(ponDTO.getCliente_id()));
+		pon.setEndereco(enderecoService.findId(ponDTO.getEndereco_id()));
+		pon.setId(ponDTO.getId());
 		PontoDTO pontoSaved = new PontoDTO(pon);
-	
-		//verificar se o ponto já existe
-		Ponto pontoTeste = pontoRepository.findByClienteByEndereco
-				(pon.getCliente().getNome(), pon.getEndereco().getLogradouro());	
-		
-		if(pontoTeste != null) {
-			
-			System.out.println("Depois da busca no banco "+pontoTeste.getCliente().getNome());
-			System.out.println("Depois da busca no banco "+pontoTeste.getEndereco().getLogradouro());
+
+		// verificar se o ponto já existe
+		Ponto pontoTeste = pontoRepository.findByClienteByEndereco(pon.getCliente().getNome(),
+				pon.getEndereco().getLogradouro());
+
+		if (pontoTeste != null) {
+
 			throw new DataDuplicateException("O Ponto já existe!");
 		}
-		
+
 		pontoRepository.save(toPonto(pontoSaved));
 		return (pontoSaved);
-		
+
 	}
 
 	public List<Ponto> findAll() {
@@ -61,10 +59,10 @@ public class PontoService {
 
 	// Transforma o PontoDTO em Ponto Apenas se existirem CLiente e Endereço
 	public Ponto toPonto(PontoDTO ponDTO) {
-				
+
 		Ponto pon = new Ponto();
 		pon.setCliente(clienteService.findId(ponDTO.getCliente_id()));
-		pon.setEndereco( enderecoService.findId(ponDTO.getEndereco_id()));
+		pon.setEndereco(enderecoService.findId(ponDTO.getEndereco_id()));
 		pon.setId(ponDTO.getId());
 
 		return pon;
@@ -78,21 +76,19 @@ public class PontoService {
 
 	// Verfica se o Ponto existe por o ID
 	public PontoDTO findById(Integer id) {
-		Ponto pon = pontoRepository.findById(id)
-				.orElseThrow(() -> new ObjectNotFoundException("Ponto não existe"));
+		Ponto pon = pontoRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Ponto não existe"));
 		return toPontoModel(pon);
 	}
-	
+
 	// Verfica se o Ponto existe por o ID
-		public Ponto findId(Integer id) {
-			Ponto pon = pontoRepository.findById(id)
-					.orElseThrow(() -> new ObjectNotFoundException("Ponto não existe"));
-			return (pon);
-		}
-	
+	public Ponto findId(Integer id) {
+		Ponto pon = pontoRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Ponto não existe"));
+		return (pon);
+	}
+
 	// Metodo criar menssagem de resposta.
-		private PontoResponseDTO createMessageResponse(Integer id, String message) {
-			return PontoResponseDTO.builder().message(message + id).build();
-		}
+	private PontoResponseDTO createMessageResponse(Integer id, String message) {
+		return PontoResponseDTO.builder().message(message + id).build();
+	}
 
 }
