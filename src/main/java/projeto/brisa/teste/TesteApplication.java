@@ -1,5 +1,7 @@
 package projeto.brisa.teste;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -9,11 +11,14 @@ import lombok.AllArgsConstructor;
 import projeto.brisa.teste.entity.Cliente;
 import projeto.brisa.teste.entity.Contrato;
 import projeto.brisa.teste.entity.Endereco;
+import projeto.brisa.teste.entity.HistoricoContrato;
 import projeto.brisa.teste.entity.Ponto;
 import projeto.brisa.teste.enums.ClienteType;
+import projeto.brisa.teste.enums.ContratoType;
 import projeto.brisa.teste.repositories.ClienteRepository;
 import projeto.brisa.teste.repositories.ContratoRepository;
 import projeto.brisa.teste.repositories.EnderecoRepository;
+import projeto.brisa.teste.repositories.HistoricoRepository;
 import projeto.brisa.teste.repositories.PontoRepository;
 
 //@ComponentScan(basePackages = {"projeto.brisa.teste.services"})
@@ -25,6 +30,8 @@ public class TesteApplication implements CommandLineRunner {
 	private EnderecoRepository enderecoRepository;
 	private ContratoRepository contratoRepository;
 	private PontoRepository pontoRepository;
+	private HistoricoRepository hcRepository;
+
 
 	    public static void main(String[] args) {
 	        SpringApplication.run(TesteApplication.class, args);
@@ -53,6 +60,12 @@ public class TesteApplication implements CommandLineRunner {
 	    	
 	    	contrato.setPonto(ponto);
 	    	contratoRepository.save(contrato);
+	    	
+	    	HistoricoContrato hc = new HistoricoContrato();
+			hc.setDataEvento(new Date());
+			hc.setEstadoAntigo(ContratoType.EM_VIGOR);
+			hc.setContrato(contrato);
+			hcRepository.save(hc);
 	    	
 	    		}
 	
