@@ -2,6 +2,7 @@ package projeto.brisa.teste.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -10,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
@@ -27,8 +27,10 @@ public class Cliente implements Serializable{
 	private Integer id;
 	
 	private String nome;
+	
 	private ClienteType tipo;
 	
+	private Date dataCriacao;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
@@ -39,10 +41,11 @@ public class Cliente implements Serializable{
 		this.id = id;
 		this.nome = name;
 		this.tipo = (tipo==null) ? null : tipo;
-		
+		setDataCriacao(new Date());
 	}
 	public Cliente() {
-		
+		setDataCriacao(new Date());
+
 	}
 	
 	

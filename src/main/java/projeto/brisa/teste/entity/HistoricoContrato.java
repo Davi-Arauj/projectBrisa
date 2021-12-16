@@ -41,7 +41,8 @@ public class HistoricoContrato implements Serializable{
 		this.contrato = contrato;
 	}
 	public HistoricoContrato() {
-		
+		setDataEvento(new Date());
+
 	}
 
 	

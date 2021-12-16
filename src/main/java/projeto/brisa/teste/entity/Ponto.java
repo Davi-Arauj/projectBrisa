@@ -1,6 +1,7 @@
 package projeto.brisa.teste.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,16 +30,17 @@ public class Ponto implements Serializable{
 	@JoinColumn(name = "endereco_id")
 	private Endereco endereco;
 	
+	private Date dataCriacao;
 	
 	public Ponto(Integer idPonto,Cliente cli, Endereco end) {
 	
 		id = idPonto;
 		cliente = cli;
 		endereco = end;
-		
+		setDataCriacao(new Date());
 	}
 	public Ponto() {
-		
+		setDataCriacao(new Date());
 	}
 	
 	public void setIdCliente(Integer id_cliente) {

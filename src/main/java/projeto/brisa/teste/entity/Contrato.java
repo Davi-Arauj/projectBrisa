@@ -1,6 +1,7 @@
 package projeto.brisa.teste.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,16 +25,21 @@ public class Contrato implements Serializable {
 	private Ponto ponto;
 	
 	private ContratoType estadoAtual;
+	
+	private Date dataCriacao;
 
 	public Contrato(Integer id, Ponto ponto) {
 		super();
 		this.id = id;
 		this.ponto = ponto;
 		this.estadoAtual = ContratoType.EM_VIGOR;
+		setDataCriacao(new Date());
 	}
 
 	public Contrato() {
 		this.estadoAtual = ContratoType.EM_VIGOR;
+		setDataCriacao(new Date());
+
 	}
 	
 	public ContratoType VigorDesativado() {
