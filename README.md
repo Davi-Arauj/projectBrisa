@@ -13,36 +13,6 @@ Para executar o projeto no terminal, digite o seguinte comando:
 ```shell script
 mvn spring-boot:run 
 ```
-Após executar o comando acima, basta apenas abrir o seguinte endereço e visualizar a execução do projeto:
-
-```
-http://localhost:8080/api/v1/clientes
-```
-###Com esse ednpoint no metodo GET irá retornar todos os Clientes
-```
-http://localhost:8080/api/v1/clientes/{id}
-```
-###Com esse ednpoint no metodo GET irá retornar apenas um Cliente
-```
-http://localhost:8080/api/v1/clientes/{id}
-```
-###Com esse ednpoint no metodo DELETE irá APAGAR apenas um Cliente
-```
-http://localhost:8080/api/v1/clientes/{id}
-```
-###Com esse ednpoint no metodo PUT irá ATUALIZAR o Cliente referente ao id
-###Passando no Content-Type: application/json
-###{
-###"nome" : "Cliente da Silva",
-###"tipo" : "jurídico"
-###}
-
-http://localhost:8080/api/v1/enderecos
-http://localhost:8080/api/v1/pontos
-http://localhost:8080/api/v1/contratos
-http://localhost:8080/api/v1/contratos/{id}/historico
-```
-
 
 ### O que foi utilizado para o desenvolvimento:
 
@@ -54,5 +24,6 @@ http://localhost:8080/api/v1/contratos/{id}/historico
 
 ### URL da API no Heroku:
 
-[testeBrisa]https://teste-brisa.herokuapp.com/
+[testeBrisa](https://teste-brisa.herokuapp.com/swagger-ui-testebrisa-api.html)
+
 
