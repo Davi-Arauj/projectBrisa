@@ -23,6 +23,14 @@ mvn spring-boot:run
 * Heroku
 * Banco de Dados POSTGRESQL(Local)
 
+##Observação:
+##Com o banco de dados Postegresql devidamente instalado deve-se executar os seguintes comandos:
+```
+CREATE DATABASE recrutamento;
+CREATE USER teste WITH PASSWORD '12345';
+GRANT ALL PRIVILEGES ON DATABASE "recrutamento" to teste;
+```
+
 ### URL da API no Heroku:
 
 [testeBrisa](https://teste-brisa.herokuapp.com/swagger-ui-testebrisa-api.html)
