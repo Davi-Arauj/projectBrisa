@@ -11,9 +11,9 @@ public class PontoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
  
 	
-	private Integer id; 
+	private Long id; 
 
-	private Integer cliente_id; 
+	private Long cliente_id; 
 	
 	private Integer endereco_id; 
  

@@ -10,37 +10,38 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import projeto.brisa.teste.enums.ClienteType;
 
-@Data
-@Entity
-public class Cliente implements Serializable{
+@Data 
+@Entity 
+public class Cliente implements Serializable{  
 
 
-	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private static final long serialVersionUID = 1L;  
+	@Id 
+	@GeneratedValue(strategy = GenerationType.AUTO)  
+	private Long id;  
 	
-	private String nome;
+	private String nome;  
 	
-	private ClienteType tipo;
+	private ClienteType tipo;  
 	
-	private Date dataCriacao;
+	private Date dataCriacao; 
 	
-	@JsonIgnore
-	@OneToMany(mappedBy = "cliente")
-	private List<Ponto> pontos = new ArrayList<>();
+	@JsonIgnore 
+	@OneToMany(mappedBy = "cliente")  
+	private List<Ponto> pontos = new ArrayList<>();  
 	
-	public Cliente(Integer id, String name, ClienteType tipo) {
-		super();
-		this.id = id;
-		this.nome = name;
-		this.tipo = (tipo==null) ? null : tipo;
+	public Cliente(Long id, String name, ClienteType tipo) {  
+		
+		this.id = id;   
+		this.nome = name;  
+		this.tipo = (tipo==null) ? null : tipo; 
 		setDataCriacao(new Date());
 	}
 	public Cliente() {

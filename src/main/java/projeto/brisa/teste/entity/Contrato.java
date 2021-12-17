@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import lombok.Data;
 import projeto.brisa.teste.enums.ContratoType;
@@ -19,7 +20,7 @@ public class Contrato implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	
 	@OneToOne
 	private Ponto ponto;
@@ -28,7 +29,7 @@ public class Contrato implements Serializable {
 	
 	private Date dataCriacao;
 
-	public Contrato(Integer id, Ponto ponto) {
+	public Contrato(Long id, Ponto ponto) {
 		super();
 		this.id = id;
 		this.ponto = ponto;

@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import projeto.brisa.teste.entity.HistoricoContrato;
 
-public interface HistoricoRepository extends JpaRepository<HistoricoContrato,Integer>{
+public interface HistoricoRepository extends JpaRepository<HistoricoContrato,Long>{
 
 
 

@@ -31,7 +31,7 @@ public class ClienteController {
 	private ClienteService clienteService;
 
 	@GetMapping("/{id}")
-	public ClienteDTO find(@PathVariable Integer id) {
+	public ClienteDTO find(@PathVariable Long id) {
 		return clienteService.findById(id);
 	}
 
@@ -48,13 +48,13 @@ public class ClienteController {
 	}
 
 	@PutMapping("/{id}")
-	public ClienteResponseDTO updateCliente(@PathVariable Integer id, @RequestBody ClienteDTO clienteDto)
+	public ClienteResponseDTO updateCliente(@PathVariable Long id, @RequestBody ClienteDTO clienteDto)
 			throws ObjectNotFoundException {
 		return clienteService.update(id, clienteDto);
 	}
 
 	@DeleteMapping("/{id}")
-	public ClienteResponseDTO deleteCliente(@PathVariable Integer id) {
+	public ClienteResponseDTO deleteCliente(@PathVariable Long id) {
 		return clienteService.del(id);
 	}
 

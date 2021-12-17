@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.ComponentScan;
 
 import lombok.AllArgsConstructor;
 import projeto.brisa.teste.entity.Cliente;
@@ -21,6 +23,7 @@ import projeto.brisa.teste.repositories.EnderecoRepository;
 import projeto.brisa.teste.repositories.HistoricoRepository;
 import projeto.brisa.teste.repositories.PontoRepository;
 
+@EntityScan(basePackages = {"projeto.brisa.teste.entity"})
 //@ComponentScan(basePackages = {"projeto.brisa.teste.services"})
 @SpringBootApplication
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -41,23 +44,22 @@ public class TesteApplication implements CommandLineRunner {
 		public void run(String... args) throws Exception {	
 	    	
 	    	Cliente cliente = new Cliente();
-	    	Endereco endereco = new Endereco();
-	    	Ponto ponto = new Ponto();
-	    	Contrato contrato =new Contrato();
-	    	
 	    	cliente.setNome("Davi");
 	    	cliente.setTipo(ClienteType.FISICO);
 	    	clienteRepository.save(cliente);
 	    	
+	    	Endereco endereco = new Endereco();
 	    	endereco.setLogradouro("Rua do Limoerio");
 	    	endereco.setBairro("Franciscano");
 	    	endereco.setNumero(1084);
 	    	enderecoRepository.save(endereco);
 	 
+	    	Ponto ponto = new Ponto();
 	    	ponto.setCliente(cliente);
 	    	ponto.setEndereco(endereco);
 	    	pontoRepository.save(ponto);
 	    	
+	    	Contrato contrato =new Contrato();
 	    	contrato.setPonto(ponto);
 	    	contratoRepository.save(contrato);
 	    	

@@ -2,7 +2,6 @@ package projeto.brisa.teste.services;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,21 +62,21 @@ public class ContratoService {
 	}
 
 	// Verfica se o Contrato existe por o ID e retorna um Contrato
-	public Contrato findId(Integer id) {
+	public Contrato findId(Long id) {
 		Contrato con = contratoRepository.findById(id)
 				.orElseThrow(() -> new ObjectNotFoundException("O Contrato não existe"));
 		return (con);
 	}
 
 	// Apaga o contrato do banco pelo ID
-	public ContratoResponseDTO del(Integer id) {
+	public ContratoResponseDTO del(Long id) {
 		ContratoDTO contratoDto = toContratoDTO(findId(id));
 		contratoRepository.delete(toContrato(contratoDto));
 		return createMessageResponse(id, "O Contrato apagado com Sucesso! ");
 	}
 
 	// Metodo criar menssagem de resposta.
-	private ContratoResponseDTO createMessageResponse(Integer id, String message) {
+	private ContratoResponseDTO createMessageResponse(Long id, String message) {
 		return ContratoResponseDTO.builder().message(message + id).build();
 	}
 
@@ -97,7 +96,7 @@ public class ContratoService {
 
 	// Atualiza o estado do contrato no Id está o contrato a ser mudado, e no
 	// contratoDTO está o novo valor
-	public ContratoResponseDTO updateContrato(Integer idContrato, ContratoDTO contDTO) {
+	public ContratoResponseDTO updateContrato(Long idContrato, ContratoDTO contDTO) {
 		Contrato cont = findId(idContrato);
 
 		// EM_VIGOR PARA DESATIVADO_TEMPORARIO

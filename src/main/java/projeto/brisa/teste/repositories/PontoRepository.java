@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import projeto.brisa.teste.entity.Ponto;
 
-public interface PontoRepository extends JpaRepository<Ponto,Integer>{
+public interface PontoRepository extends JpaRepository<Ponto,Long>{
 
 	@Transactional(readOnly = true)
 	@Query("SELECT obj FROM Ponto obj WHERE obj.cliente.nome =:clienteNome AND obj.endereco.logradouro =:enderecoLogradouro")

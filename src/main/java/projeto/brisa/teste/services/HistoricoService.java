@@ -14,7 +14,7 @@ public class HistoricoService {
 
 	private HistoricoRepository hcRepository;
 	//Busca o historico de um contrato
-	public HistoricoContrato findId(Integer idContrato) {
+	public HistoricoContrato findId(Long idContrato) {
 		HistoricoContrato hc = hcRepository.findById(idContrato).orElseThrow(() -> new ObjectNotFoundException("Contrato sem historico"));
 		return hc;
 	}

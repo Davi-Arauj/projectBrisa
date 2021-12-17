@@ -39,7 +39,7 @@ public class PontoController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public PontoResponseDTO deletePonto(@PathVariable Integer id) {
+	public PontoResponseDTO deletePonto(@PathVariable Long id) {
 		return pontoService.del(id);
 	}
 

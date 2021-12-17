@@ -45,23 +45,23 @@ public class ContratoController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ContratoResponseDTO deleteContrato(@PathVariable Integer id) {
+	public ContratoResponseDTO deleteContrato(@PathVariable Long id) {
 		return contratotoService.del(id);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Contrato> findContrato(@PathVariable Integer id) {
+	public ResponseEntity<Contrato> findContrato(@PathVariable Long id) {
 		return ResponseEntity.ok().body(contratotoService.findId(id));
 	} 
 	
 	@GetMapping("/{id}/historico")
-	public ResponseEntity<HistoricoContrato> findHistoricoContrato(@PathVariable Integer id) {
+	public ResponseEntity<HistoricoContrato> findHistoricoContrato(@PathVariable Long id) {
 		return ResponseEntity.ok().body(hcService.findId(id));
 	}
 
 	//Atualiza o estado do Contrato
 	@PutMapping("/{id}")
-	public ContratoResponseDTO updateContrato(@PathVariable Integer id,@RequestBody ContratoDTO cont){		
+	public ContratoResponseDTO updateContrato(@PathVariable Long id,@RequestBody ContratoDTO cont){		
 		return contratotoService.updateContrato(id, cont);
 	}
 

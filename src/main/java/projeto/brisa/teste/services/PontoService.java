@@ -68,26 +68,26 @@ public class PontoService {
 		return pon;
 	}
 
-	public PontoResponseDTO del(Integer id) {
+	public PontoResponseDTO del(Long id) {
 		PontoDTO pontoDto = findById(id);
 		pontoRepository.delete(toPonto(pontoDto));
 		return createMessageResponse(id, "Ponto apagado com Sucesso! ");
 	}
 
 	// Verfica se o Ponto existe por o ID
-	public PontoDTO findById(Integer id) {
+	public PontoDTO findById(Long id) {
 		Ponto pon = pontoRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Ponto não existe"));
 		return toPontoModel(pon);
 	}
 
 	// Verfica se o Ponto existe por o ID
-	public Ponto findId(Integer id) {
+	public Ponto findId(Long id) {
 		Ponto pon = pontoRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Ponto não existe"));
 		return (pon);
 	}
 
 	// Metodo criar menssagem de resposta.
-	private PontoResponseDTO createMessageResponse(Integer id, String message) {
+	private PontoResponseDTO createMessageResponse(Long id, String message) {
 		return PontoResponseDTO.builder().message(message + id).build();
 	}
 

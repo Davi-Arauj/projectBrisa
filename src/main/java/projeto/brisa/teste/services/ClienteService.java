@@ -39,7 +39,7 @@ public class ClienteService {
 	}
 
 	// Atualiza o Cliente
-	public ClienteResponseDTO update(Integer id, ClienteDTO clienteDto) {
+	public ClienteResponseDTO update(Long id, ClienteDTO clienteDto) {
 		verifyIfExists(toCliente(clienteDto));
 		ClienteDTO cliUpdate = findById(id);
 
@@ -49,20 +49,20 @@ public class ClienteService {
 	}
 
 	// Verfica se o Cliente existe por o ID
-	public ClienteDTO findById(Integer id) {
+	public ClienteDTO findById(Long id) {
 		Cliente cli = clienteRepository.findById(id)
 				.orElseThrow(() -> new ObjectNotFoundException("Cliente não existe"));
 		return toClienteModel(cli);
 	}
 	// Verfica se o Cliente existe por o ID
-		public Cliente findId(Integer id) {
+		public Cliente findId(Long id) {
 			Cliente cli = clienteRepository.findById(id)
 					.orElseThrow(() -> new ObjectNotFoundException("Cliente não existe"));
 			return (cli);
 		}
 
 	// Apagar um Cliente por o ID
-	public ClienteResponseDTO del(Integer id) {
+	public ClienteResponseDTO del(Long id) {
 		ClienteDTO cliDto = findById(id);
 		clienteRepository.delete(toCliente(cliDto));
 		return createMessageResponse(id, "Cliente apagado com Sucesso! ");
@@ -96,7 +96,7 @@ public class ClienteService {
 	}
 
 	// Metodo criar menssagem de resposta.
-	private ClienteResponseDTO createMessageResponse(Integer id, String message) {
+	private ClienteResponseDTO createMessageResponse(Long id, String message) {
 		return ClienteResponseDTO.builder().message(message + id).build();
 	}
 

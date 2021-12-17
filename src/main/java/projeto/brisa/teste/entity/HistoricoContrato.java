@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -22,7 +23,7 @@ public class HistoricoContrato implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;	
+	private Long id;	
 	private Date dataEvento ;
 	private ContratoType estadoAntigo;
 	private ContratoType estadoNovo;
@@ -31,7 +32,7 @@ public class HistoricoContrato implements Serializable{
 	@OneToOne
 	private Contrato contrato;
 	
-	public HistoricoContrato(Integer id, Date dataEvento, ContratoType estadoAntigo, ContratoType estadoNovo,
+	public HistoricoContrato(Long id, Date dataEvento, ContratoType estadoAntigo, ContratoType estadoNovo,
 			Contrato contrato) {
 		super();
 		this.id = id;

@@ -7,11 +7,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import projeto.brisa.teste.entity.Contrato;
 
-public interface ContratoRepository extends JpaRepository<Contrato, Integer> {
+public interface ContratoRepository extends JpaRepository<Contrato, Long> {
 
 	@Transactional(readOnly = true)
 	@Query("SELECT obj FROM Contrato obj WHERE obj.ponto.id =:pontoId")
-	Contrato findByContratoByPonto(@Param("pontoId")Integer ponto_Id);
+	Contrato findByContratoByPonto(@Param("pontoId")Long ponto_Id);
 
 	
 //	@Query("SELECT obj FROM Ponto obj WHERE obj.cliente.nome =:clienteNome AND obj.endereco.logradouro =:enderecoLogradouro")

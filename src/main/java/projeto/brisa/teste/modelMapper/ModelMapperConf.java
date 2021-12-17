@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class ModelMapperConf {
+public class ModelMapperConf{
 
 	@Bean
 	public ModelMapper modelMapper() {
