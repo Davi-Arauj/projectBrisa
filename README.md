@@ -21,6 +21,7 @@ mvn spring-boot:run
 * Spring Boot(Web, Data JPA, H2, Lombook, MapeerModel, Hibernate-validator,OpenAPI)
 * GitHub
 * Heroku
+* Banco de Dados POSTGRESQL(Local)
 
 ### URL da API no Heroku:
 
