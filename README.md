@@ -17,6 +17,26 @@ Após executar o comando acima, basta apenas abrir o seguinte endereço e visual
 
 ```
 http://localhost:8080/api/v1/clientes
+```
+###Com esse ednpoint no metodo GET irá retornar todos os Clientes
+```
+http://localhost:8080/api/v1/clientes/{id}
+```
+###Com esse ednpoint no metodo GET irá retornar apenas um Cliente
+```
+http://localhost:8080/api/v1/clientes/{id}
+```
+###Com esse ednpoint no metodo DELETE irá APAGAR apenas um Cliente
+```
+http://localhost:8080/api/v1/clientes/{id}
+```
+###Com esse ednpoint no metodo PUT irá ATUALIZAR o Cliente referente ao id
+###Passando no Content-Type: application/json
+###{
+###"nome" : "Cliente da Silva",
+###"tipo" : "jurídico"
+###}
+
 http://localhost:8080/api/v1/enderecos
 http://localhost:8080/api/v1/pontos
 http://localhost:8080/api/v1/contratos
