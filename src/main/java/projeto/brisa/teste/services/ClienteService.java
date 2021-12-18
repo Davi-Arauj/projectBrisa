@@ -28,8 +28,7 @@ public class ClienteService {
 		verifyIfExists(toCliente(clienteDto));
 		Cliente clienteSaved = null;
 		Cliente cli = toCliente(clienteDto);
-		clienteSaved = clienteRepository.save(cli);
-		
+		clienteSaved = clienteRepository.save(cli);		
 		return toClienteModel(clienteSaved);
 	}
 
