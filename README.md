@@ -2,7 +2,7 @@
 
 Foi desenvolvido um pequeno sistema para o gerenciamento de clientes,endereços,pontos,contratos e historico de uma empresa através de uma API REST, criada com o Spring Boot.
 
-## Forão desenvolvidos os seguintes tópicos:
+## Foram desenvolvidos os seguintes tópicos:
  
 * Criação de modelo de dados para o mapeamento de entidades em bancos de dados
 * Desenvolvimento de operações de gerenciamento de usuários (Cadastro, leitura, atualização e remoção de clientes,endereços,pontos,contratos e historico de um sistema).
